@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.CityMapper">
+	
+	<resultMap id="CityResultMap" type="com.example.model.City">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="state" property="state" />
+		<result column="country" property="country" />
+		
+	</resultMap>
+	
+	<select id="getAllCity" resultMap="CityResultMap">
+		select id, name, state, country from cityinfo
+	</select>
+	
+	<select id="getOneCity" resultMap="CityResultMap"  parameterType="int">
+		select id, name, state, country from cityinfo where id=#{id}
+	</select>
+	
+	<insert id="insertCity" parameterType="com.example.model.City" useGeneratedKeys="true" keyProperty="id">
+		insert into cityinfo(name, state, country) values(#{name},#{state},#{country})
+	</insert>
+	
+	<delete id="delCity" parameterType="int">
+		delete from cityinfo where id=#{id}
+	</delete>
+</mapper>
